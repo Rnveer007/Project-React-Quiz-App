@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 // import './App.css'
 
 function Header() {
@@ -30,10 +30,18 @@ function Header() {
     setSuccesfullAlert(true);
     setUserInput("")
 
+    // save data in local storage
+    localStorage.setItem("user", userInput)
+
     setTimeout(() => {
       setSuccesfullAlert(false);
     }, 2000);
   }
+
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+  }, []);
 
   return (
     <>
