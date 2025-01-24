@@ -22,7 +22,7 @@ function App() {
 
         {/* Create User Alert */}
         <div className={`text-white font-bold w-[300px] bg-red-600 text-center py-3 absolute right-180 top-50 ${showRedAlert ? "" : "hidden"}`} >
-          <h1>User Created Successfully</h1>
+          <h1> User not found </h1>
         </div>
 
         <div><img src={logo} alt="" /></div>

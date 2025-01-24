@@ -1,12 +1,22 @@
+import { space } from "postcss/lib/list";
 import React, { useEffect, useState } from "react";
 // import './App.css'
 
 function Header() {
   const [showUserBox, setShowUserBox] = useState(false);
   const [userInput, setUserInput] = useState("");
-  const [savedUserInput, setSavedUserInput] = useState("");
+  const [savedUserInput, setSavedUserInput] = useState([]);
   const [addUserValue, setAddUserValue] = useState(false);
   const [succesfullAlert, setSuccesfullAlert] = useState(false);
+
+  const [users , SetUsers] = useState (
+    localStorage.getItem('user') !== null ? JSON.parse(localStorage.getItem("user")) : []
+  )
+
+
+  useEffect(() => {
+    localStorage.setItem("user" , JSON.stringify(users))
+  }, [users]);
 
   function showCreateUserBTn() {
     setShowUserBox(true);
@@ -23,15 +33,17 @@ function Header() {
       return;
     }
 
+ 
 
     setShowUserBox(false);
     setAddUserValue(true);
-    setSavedUserInput(userInput);
-    setSuccesfullAlert(true);
-    setUserInput("")
 
-    // save data in local storage
-    localStorage.setItem("user", userInput)
+    const userObj = { id :Date.now(), name : userInput};
+    SetUsers([...users ,userObj])
+
+
+    setSuccesfullAlert(true);
+    setUserInput("");
 
     setTimeout(() => {
       setSuccesfullAlert(false);
@@ -39,9 +51,7 @@ function Header() {
   }
 
 
-  useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-  }, []);
+
 
   return (
     <>
@@ -61,7 +71,9 @@ function Header() {
               className={`text-white text-xl px-3 py-2 cursor-pointer capitalize ${addUserValue ? "" : "hidden"
                 }`}
             >
-              {savedUserInput}
+           {   users.map((user) => {
+           return <span key={user.id} className="block"> {user.name} </span>
+           })}
             </h1>
           </div>
         </div>
@@ -86,7 +98,7 @@ function Header() {
             placeholder="Enter Your Name"
             value={userInput}
             onChange={(e) => setUserInput(e.target.value)}
-            className="border-2 w-[400px] py-1 pl-6"
+            className="border-2 w-[400px] py-1 pl-6 capitalize"
           />
 
           <div className="flex justify-between my-10 w-[250px]">
