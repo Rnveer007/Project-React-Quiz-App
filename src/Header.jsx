@@ -1,11 +1,11 @@
 import { space } from "postcss/lib/list";
 import React, { useEffect, useState } from "react";
-// import './App.css'
+import './App.css'
 
 function Header() {
   const [showUserBox, setShowUserBox] = useState(false);
   const [userInput, setUserInput] = useState("");
-  const [savedUserInput, setSavedUserInput] = useState([]);
+  // const [savedUserInput, setSavedUserInput] = useState([]);
   const [addUserValue, setAddUserValue] = useState(false);
   const [succesfullAlert, setSuccesfullAlert] = useState(false);
 
