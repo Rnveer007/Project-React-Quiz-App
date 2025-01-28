@@ -5,17 +5,17 @@ import './App.css'
 function Header() {
   const [showUserBox, setShowUserBox] = useState(false);
   const [userInput, setUserInput] = useState("");
-  // const [savedUserInput, setSavedUserInput] = useState([]);
   const [addUserValue, setAddUserValue] = useState(false);
   const [succesfullAlert, setSuccesfullAlert] = useState(false);
+  const [latestUser, setLatestUser] = useState([])
 
-  const [users , SetUsers] = useState (
+  const [users, SetUsers] = useState(
     localStorage.getItem('user') !== null ? JSON.parse(localStorage.getItem("user")) : []
   )
 
 
   useEffect(() => {
-    localStorage.setItem("user" , JSON.stringify(users))
+    localStorage.setItem("user", JSON.stringify(users))
   }, [users]);
 
   function showCreateUserBTn() {
@@ -33,13 +33,14 @@ function Header() {
       return;
     }
 
- 
+
 
     setShowUserBox(false);
     setAddUserValue(true);
 
-    const userObj = { id :Date.now(), name : userInput};
-    SetUsers([...users ,userObj])
+    const userObj = { id: Date.now(), name: userInput };
+    SetUsers([...users, userObj])
+    setLatestUser(userObj)
 
 
     setSuccesfullAlert(true);
@@ -71,9 +72,7 @@ function Header() {
               className={`text-white text-xl px-3 py-2 cursor-pointer capitalize ${addUserValue ? "" : "hidden"
                 }`}
             >
-           {   users.map((user) => {
-           return <span key={user.id} className="block"> {user.name} </span>
-           })}
+             <span>{latestUser.name}</span>
             </h1>
           </div>
         </div>
