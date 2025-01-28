@@ -8,6 +8,7 @@ function Header({ userAvailable, setUserAvailable }) {
   const [userInput, setUserInput] = useState("");
   const [showUserName, setUserName] = useState(false);
   const [latestUser, setLatestUser] = useState(null);
+  const [showSecondPage , setShowSecondPage] = useState(false);
 
   const [users, SetUsers] = useState(
     localStorage.getItem('userData') !== null ? JSON.parse(localStorage.getItem("userData")) : []
@@ -39,7 +40,8 @@ function Header({ userAvailable, setUserAvailable }) {
 
     setShowUserBox(false);
     setSuccesfullAlert(true);
-    setUserName(true)
+    setUserName(true);
+    setShowSecondPage(true);
 
     setTimeout(() => {
       setSuccesfullAlert(false);
@@ -51,7 +53,7 @@ function Header({ userAvailable, setUserAvailable }) {
   return (
     <>
       <div className="h-full bg-black relative">
-        <div className="flex justify-evenly bg-black h-full py-12 items-center hidden">
+        <div className = {`pageFirstHeader flex justify-evenly bg-black h-full py-12 items-center `}>
           <h1 className="text-white text-2xl">Quiz Pop</h1>
           <div>
             <button
@@ -71,13 +73,13 @@ function Header({ userAvailable, setUserAvailable }) {
 
 
 
-        <div className="flex justify-evenly bg-black h-full py-12 items-center">
+        <div className={`pageSecondHeader flex justify-evenly bg-black h-full py-12 items-center hidden`}>
           <h1 className="text-white text-2xl">Quiz Pop</h1>
 
           <ul className="flex text-white">
-            <li className="mx-4">Home</li>
-            <li className="mx-4">Quiz</li>
-            <li className="mx-4">Score</li>
+            <li className="mx-4 cursor-pointer">Home</li>
+            <li className="mx-4 cursor-pointer">Quiz</li>
+            <li className="mx-4 cursor-pointer">Score</li>
           </ul>
 
           <h1
