@@ -2,17 +2,16 @@ import { space } from "postcss/lib/list";
 import React, { useEffect, useState } from "react";
 import './App.css'
 
-function Header() {
+function Header({ userAvailable, setUserAvailable }) {
   const [showUserBox, setShowUserBox] = useState(false);
   const [userInput, setUserInput] = useState("");
   const [addUserValue, setAddUserValue] = useState(false);
   const [succesfullAlert, setSuccesfullAlert] = useState(false);
-  const [latestUser, setLatestUser] = useState([])
+  const [latestUser, setLatestUser] = useState(null);
 
   const [users, SetUsers] = useState(
     localStorage.getItem('user') !== null ? JSON.parse(localStorage.getItem("user")) : []
   )
-
 
   useEffect(() => {
     localStorage.setItem("user", JSON.stringify(users))
@@ -28,15 +27,14 @@ function Header() {
   }
 
   function addUserAndShowAlert() {
-    if (userInput.trim() === "") {
+    if (userInput === "") {
       alert("Username cannot be empty.");
       return;
     }
 
-
-
     setShowUserBox(false);
     setAddUserValue(true);
+    setUserAvailable(true); // Set userAvailable to true
 
     const userObj = { id: Date.now(), name: userInput };
     SetUsers([...users, userObj])
@@ -50,7 +48,6 @@ function Header() {
       setSuccesfullAlert(false);
     }, 2000);
   }
-
 
 
 
@@ -72,7 +69,7 @@ function Header() {
               className={`text-white text-xl px-3 py-2 cursor-pointer capitalize ${addUserValue ? "" : "hidden"
                 }`}
             >
-             <span>{latestUser.name}</span>
+             <span>{latestUser?.name}</span>
             </h1>
           </div>
         </div>
