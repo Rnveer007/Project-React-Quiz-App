@@ -2,19 +2,12 @@ import { useState } from 'react'
 import './App.css'
 import logo from './assets/img.png';
 
-function App() {
-  const [showRedAlert, setRedAlert] = useState(false);
-  
-  const [userAvailable, setUserAvailable] = useState(false);
-
-  function showAlert() {
-    setRedAlert(true)
-
+function App({ userAvailable, setUserAvailable }) {
+  function showAlert() {      
+    setUserAvailable(true)
     setTimeout(() => {
-      setRedAlert(false)
+      setUserAvailable(false)
     }, 2000);
-
-
   }
 
   return (
@@ -26,7 +19,7 @@ function App() {
           <button onClick={showAlert} className='border-2 px-10 py-1 bg-black text-white mt-8 cursor-pointer'>Start</button>
         </div>
         {/* Create User Alert */}
-        <div className={`text-white font-bold w-[300px] bg-red-600 text-center py-3 absolute right-180 top-50 ${showRedAlert ? "" : "hidden"}`} >
+        <div className={`text-white font-bold w-[300px] bg-red-600 text-center py-3 absolute right-180 top-50 ${userAvailable ? "" : "hidden"}`} >
           <h1> User not found </h1>
         </div>
 

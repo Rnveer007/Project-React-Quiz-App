@@ -34,16 +34,18 @@ function Header({ userAvailable, setUserAvailable }) {
 
     setShowUserBox(false);
     setAddUserValue(true);
-    setUserAvailable(true); // Set userAvailable to true
 
+
+    
     const userObj = { id: Date.now(), name: userInput };
     SetUsers([...users, userObj])
     setLatestUser(userObj)
 
-
-    setSuccesfullAlert(true);
+    setAddUserValue(true)
     setUserInput("");
 
+    setSuccesfullAlert(true);
+    setUserAvailable(true);// Set userAvailable to true
     setTimeout(() => {
       setSuccesfullAlert(false);
     }, 2000);
@@ -69,7 +71,7 @@ function Header({ userAvailable, setUserAvailable }) {
               className={`text-white text-xl px-3 py-2 cursor-pointer capitalize ${addUserValue ? "" : "hidden"
                 }`}
             >
-             <span>{latestUser?.name}</span>
+              <span>{latestUser?.name}</span>
             </h1>
           </div>
         </div>
