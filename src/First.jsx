@@ -4,12 +4,15 @@ import Header from './header';
 import App from './App';
 
 function First() {
-    const [userAvailable, setUserAvailable] = useState(false);
+    // const [userAvailable, setUserAvailable] = useState(false); 
+     const [showAlert, setShowAlert] = useState(false)
+     const [latestUser, setLatestUser] = useState(null);
+
 
     return (
         <>
-            <Header userAvailable ={userAvailable}  setUserAvailable ={setUserAvailable}/>
-            <App userAvailable ={userAvailable} setUserAvailable = {setUserAvailable} />
+            <Header showAlert ={showAlert}  setShowAlert ={setShowAlert} latestUser ={latestUser} setLatestUser = {setLatestUser}/>
+            <App showAlert ={showAlert} setShowAlert = {setShowAlert}  latestUser ={latestUser} setLatestUser = {setLatestUser} />
         </>
     )
 }

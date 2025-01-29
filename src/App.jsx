@@ -2,8 +2,8 @@ import { useState } from 'react'
 import './App.css'
 import logo from './assets/img.png';
 
-function App({ userAvailable, setUserAvailable }) {
-  const [showAlert, setShowAlert] = useState(false)
+function App({ showAlert,setShowAlert, latestUser ,setLatestUser}) {
+
   function showRedAlert() {
     setShowAlert (true)
     
@@ -14,14 +14,14 @@ function App({ userAvailable, setUserAvailable }) {
 
   return (
     <>
-      <div className='flex items-center justify-evenly h-[826px] bg-teal-800 '>
+      <div className={`flex items-center justify-evenly h-[826px] bg-teal-800 ${showAlert ? "hidden" : ""}` }>
 
         <div className=''>
           <h1 className='text-white font-bold text-5xl w-[500px] leading-16'>Take Your <span className='text-yellow-500'>Knowledge</span> to the next Level</h1>
           <button onClick={showRedAlert} className='border-2 px-10 py-1 bg-black text-white mt-8 cursor-pointer'>Start</button>
         </div>
         {/* Create User Alert */}
-        <div className={`text-white font-bold w-[300px] bg-red-600 text-center py-3 absolute right-180 top-50 ${  showAlert ? "" : "hidden" }`} >
+        <div className={`text-white font-bold w-[300px] bg-red-600 text-center py-3 absolute right-180 top-50 ${  showAlert ? "" : "hidden" }  ${!latestUser ? "" : "hidden"}`} >
           <h1> User not found </h1>
         </div>
 
@@ -29,7 +29,7 @@ function App({ userAvailable, setUserAvailable }) {
       </div>
 
 
-    <div className='secondPage bg-yellow-800 h-[834px] flex justify-center hidden'>
+    <div className={`secondPage bg-yellow-800 h-[834px] flex justify-center  ${showAlert ? "" : "hidden"} ${!latestUser ? "hidden" : ""} `}>
       <div className='mt-36 h-[500px] '>
         <h1 className='text-white text-4xl text-center my-4 pb-3'>Welcome to Quize App</h1>
         <p className='text-center text-white my-4 text-xl'>Select Topic</p>
