@@ -7,12 +7,13 @@ function First() {
     // const [userAvailable, setUserAvailable] = useState(false); 
      const [showAlert, setShowAlert] = useState(false)
      const [latestUser, setLatestUser] = useState(null);
+     const [showSecondPage, setShowSecondPage] = useState(false);
 
 
     return (
         <>
-            <Header showAlert ={showAlert}  setShowAlert ={setShowAlert} latestUser ={latestUser} setLatestUser = {setLatestUser}/>
-            <App showAlert ={showAlert} setShowAlert = {setShowAlert}  latestUser ={latestUser} setLatestUser = {setLatestUser} />
+            <Header showAlert ={showAlert}  setShowAlert ={setShowAlert} latestUser ={latestUser} setLatestUser = {setLatestUser} showSecondPage = {showSecondPage} setShowSecondPage = {setShowSecondPage}/>
+            <App showAlert ={showAlert} setShowAlert = {setShowAlert}  latestUser ={latestUser} setLatestUser = {setLatestUser} showSecondPage = {showSecondPage} setShowSecondPage ={setShowSecondPage} />
         </>
     )
 }
