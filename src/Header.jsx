@@ -45,7 +45,7 @@ function Header({ showAlert,setShowAlert, latestUser,setLatestUser ,setShowSecon
 
     setTimeout(() => {
       setSuccesfullAlert(false);
-    }, 2000);
+    }, 1000);
   }
 
 
