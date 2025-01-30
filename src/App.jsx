@@ -4,9 +4,6 @@ import logo from './assets/img.png';
 
 function App({ showAlert,setShowAlert, latestUser,setLatestUser ,setShowSecondPage,showSecondPage}) {
 
-  
-
-
   function showRedAlert() {
     if (!latestUser) {
       setShowAlert(true);
