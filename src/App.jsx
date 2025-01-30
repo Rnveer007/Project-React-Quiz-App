@@ -12,7 +12,7 @@ function App({ showAlert,setShowAlert, latestUser,setLatestUser ,setShowSecondPa
       setShowAlert(true);
       setTimeout(() => {
         setShowAlert(false);
-      }, 2000);
+      }, 1000);
     } else {
       setShowSecondPage(true); // Show second page if user exists
     }
@@ -37,7 +37,7 @@ function App({ showAlert,setShowAlert, latestUser,setLatestUser ,setShowSecondPa
 
     <div className={`secondPage bg-yellow-800 h-[834px] flex justify-center  ${showSecondPage ? "" : "hidden"}`}>
       <div className='mt-36 h-[500px] '>
-        <h1 className='text-white text-4xl text-center my-4 pb-3'>Welcome to Quize App</h1>
+        <h1 className='text-white text-4xl text-center my-4 pb-3'>Welcome to Quiz App</h1>
         <p className='text-center text-white my-4 text-xl'>Select Topic</p>
         <button className='block w-[500px] my-8 py-3 bg-white cursor-pointer border-2'>MUSIC</button>
         <button className='block w-[500px] my-8 py-3 bg-white cursor-pointer border-2'>MODERN ART</button>

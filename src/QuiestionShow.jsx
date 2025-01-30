@@ -4,15 +4,15 @@ import { questions } from './FileOfQuestions'
 function QuiestionShow() {
     const [currentQuestion, setCurrentQuestion] = useState(getRandomQuestion())
 
-  function getRandomQuestion( ){
-    const randomIndex = Math.floor(Math.random() * questions.length)
-    return questions[randomIndex] 
-  }
+    function getRandomQuestion() {
+        const randomIndex = Math.floor(Math.random() * questions.length)
+        return questions[randomIndex]
+    }
 
-function nextQuestionHandle (){
-       setCurrentQuestion(getRandomQuestion())
+    function nextQuestionHandle() {
+        setCurrentQuestion(getRandomQuestion())
 
-}
+    }
 
     return (
         <div>
@@ -21,6 +21,12 @@ function nextQuestionHandle (){
                     <h1 className='text-4xl font-bold'>Coading Quiz</h1>
                     <div>
                         <h2>{currentQuestion.q}</h2>
+                        {
+                            currentQuestion.opt.map((item, index) => {
+                                return (<button key={index} className='block'> {item} </button>
+                                )
+                            })
+                        }
                         <button onClick={nextQuestionHandle}> NEXT</button>
                     </div>
                 </div>
