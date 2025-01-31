@@ -1,19 +1,26 @@
 import React, { useState } from 'react';
 import { questions } from './FileOfQuestions';
 
-function QuiestionShow() {
+function QuestionShow() {
     const [questionIndex, setQuestionIndex] = useState(0);
     const [score, setScore] = useState(0);
     const [showResult, setShowResult] = useState(false);
-    const [clickedAns, setClickedAns] = useState(null);  // Store the last clicked answer
+    const [clickedAns, setClickedAns] = useState([]);  // Store selected answers as an array
 
     // Function to move to the next question
     function nextQuestionHandle() {
-        // Check if there's a next question, or show the result if at the end
         if (questionIndex < questions.length - 1) {
             setQuestionIndex(prevIndex => prevIndex + 1);
         } else {
-            setShowResult(true);
+            // Calculate score based on clickedAns array
+            let finalScore = 0;
+            clickedAns.forEach((answer, idx) => {
+                if (answer === questions[idx].correctAnswer) {
+                    finalScore++;
+                }
+            });
+            setScore(finalScore); // Set final score
+            setShowResult(true);  // Show results
         }
     }
 
@@ -22,18 +29,16 @@ function QuiestionShow() {
         setQuestionIndex(0);
         setScore(0);
         setShowResult(false);
-        setClickedAns(null); // Reset the clicked answer on restart
+        setClickedAns([]); // Clear clicked answers on restart
     }
 
     // Function to handle answer selection
     function selectAnswer(item) {
-        setClickedAns(item);  // Store the clicked answer
+        const updatedAnswers = [...clickedAns];
+        updatedAnswers[questionIndex] = item;  // Update the selected answer for the current question
+        setClickedAns(updatedAnswers);  // Store the updated answers
 
-        // Check if the selected answer is correct
-        const currentQuestion = questions[questionIndex];
-        if (item === currentQuestion.correctAnswer) {
-            setScore(prevScore => prevScore + 1); // Increase score for correct answer
-        }
+        // Optional: Immediate feedback for selecting an answer
     }
 
     return (
@@ -48,9 +53,9 @@ function QuiestionShow() {
                                 {questions[questionIndex].opt.map((item, index) => (
                                     <button
                                         key={index}
-                                        onClick={() => selectAnswer(item)}  // Set the selected answer
+                                        onClick={() => selectAnswer(item)}  // Store the selected answer
                                         className={`block my-4 border-2 px-4 py-1 w-64 cursor-pointer m-auto
-                                             ${clickedAns === item ? 'bg-blue-500' : ''}`}
+                                             ${clickedAns[questionIndex] === item ? 'bg-blue-500' : ''}`} // Highlight selected answer
                                     >
                                         {item}
                                     </button>
@@ -89,4 +94,4 @@ function QuiestionShow() {
     );
 }
 
-export default QuiestionShow;
+export default QuestionShow;
