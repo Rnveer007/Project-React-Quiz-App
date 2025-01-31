@@ -9,13 +9,14 @@ function First() {
      const [showAlert, setShowAlert] = useState(false)
      const [latestUser, setLatestUser] = useState(null);
      const [showSecondPage, setShowSecondPage] = useState(false);
+     const [showQuizSection, setShowQuizsection] = useState(false)
 
 
     return (
         <>
-            <Header showAlert ={showAlert}  setShowAlert ={setShowAlert} latestUser ={latestUser} setLatestUser = {setLatestUser} showSecondPage = {showSecondPage} setShowSecondPage = {setShowSecondPage}/>
-            <App showAlert ={showAlert} setShowAlert = {setShowAlert}  latestUser ={latestUser} setLatestUser = {setLatestUser} showSecondPage = {showSecondPage} setShowSecondPage ={setShowSecondPage} />
-            < QuiestionShow />
+            <Header showAlert ={showAlert}  setShowAlert ={setShowAlert} latestUser ={latestUser} setLatestUser = {setLatestUser} showSecondPage = {showSecondPage} setShowSecondPage = {setShowSecondPage} showQuizSection ={showQuizSection} setShowQuizsection ={setShowQuizsection} />
+            <App showAlert ={showAlert} setShowAlert = {setShowAlert}  latestUser ={latestUser} setLatestUser = {setLatestUser} showSecondPage = {showSecondPage} setShowSecondPage ={setShowSecondPage} showQuizSection ={showQuizSection}  setShowQuizsection ={setShowQuizsection} />
+            < QuiestionShow showQuizSection ={showQuizSection} setShowQuizsection ={setShowQuizsection} showSecondPage ={showSecondPage} setShowSecondPage ={setShowSecondPage}  />
         </>
     )
 }

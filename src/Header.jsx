@@ -1,13 +1,13 @@
 // import { space } from "postcss/lib/list";
 import React, { useEffect, useState } from "react";
-import './App.css'
+import './App.css';
 
-function Header({ showAlert,setShowAlert, latestUser,setLatestUser ,setShowSecondPage,showSecondPage}) {
+function Header({ latestUser, setLatestUser, showSecondPage,showQuizSection }) {
   const [showUserBox, setShowUserBox] = useState(false);
   const [succesfullAlert, setSuccesfullAlert] = useState(false);
   const [userInput, setUserInput] = useState("");
   const [showUserName, setUserName] = useState(false);
- 
+
   // const [showSecondPage , setShowSecondPage] = useState(false);
 
   const [users, SetUsers] = useState(
@@ -41,7 +41,6 @@ function Header({ showAlert,setShowAlert, latestUser,setLatestUser ,setShowSecon
     setShowUserBox(false);
     setSuccesfullAlert(true);
     setUserName(true);
-    // setShowSecondPage(true);
 
     setTimeout(() => {
       setSuccesfullAlert(false);
@@ -53,7 +52,7 @@ function Header({ showAlert,setShowAlert, latestUser,setLatestUser ,setShowSecon
   return (
     <>
       <div className="h-full bg-black relative">
-        <div className = {`pageFirstHeader flex justify-evenly bg-black h-full py-12 items-center ${showSecondPage ? "hidden" : ""} `}>
+        <div className={`pageFirstHeader flex justify-evenly bg-black h-full py-12 items-center ${showSecondPage ? "hidden" : ""} `}>
           <h1 className="text-white text-2xl">Quiz Pop</h1>
           <div>
             <button
