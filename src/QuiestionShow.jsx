@@ -5,22 +5,24 @@ function QuestionShow() {
     const [questionIndex, setQuestionIndex] = useState(0);
     const [score, setScore] = useState(0);
     const [showResult, setShowResult] = useState(false);
-    const [clickedAns, setClickedAns] = useState([]);  // Store selected answers as an array
+    const [clickedAns, setClickedAns] = useState(null);  // Store the last clicked answer
+    const [userAnswers, setUserAnswers] = useState([]);  // Array to store user answers
 
     // Function to move to the next question
     function nextQuestionHandle() {
+        // Store the answer for the current question
+        const currentQuestion = questions[questionIndex];
+        setUserAnswers(prevAnswers => [
+            ...prevAnswers, 
+            { question: currentQuestion.q, answer: clickedAns, isCorrect: clickedAns === currentQuestion.a }
+        ]);
+
+        // Check if there's a next question, or show the result if at the end
         if (questionIndex < questions.length - 1) {
             setQuestionIndex(prevIndex => prevIndex + 1);
+            setClickedAns(null); // Reset clicked answer for next question
         } else {
-            // Calculate score based on clickedAns array
-            let finalScore = 0;
-            clickedAns.forEach((answer, idx) => {
-                if (answer === questions[idx].correctAnswer) {
-                    finalScore++;
-                }
-            });
-            setScore(finalScore); // Set final score
-            setShowResult(true);  // Show results
+            setShowResult(true);
         }
     }
 
@@ -29,17 +31,23 @@ function QuestionShow() {
         setQuestionIndex(0);
         setScore(0);
         setShowResult(false);
-        setClickedAns([]); // Clear clicked answers on restart
+        setClickedAns(null); // Reset the clicked answer on restart
+        setUserAnswers([]); // Clear stored answers on restart
     }
 
     // Function to handle answer selection
     function selectAnswer(item) {
-        const updatedAnswers = [...clickedAns];
-        updatedAnswers[questionIndex] = item;  // Update the selected answer for the current question
-        setClickedAns(updatedAnswers);  // Store the updated answers
+        setClickedAns(item);  // Store the clicked answer
 
-        // Optional: Immediate feedback for selecting an answer
+        // Check if the selected answer is correct
+        const currentQuestion = questions[questionIndex];
+        if (item === currentQuestion.a) {
+            setScore(prevScore => prevScore + 1); // Increase score for correct answer
+        }
     }
+
+    // Get only the correct answers from userAnswers
+    const correctAnswers = userAnswers.filter(item => item.isCorrect);
 
     return (
         <div>
@@ -53,9 +61,9 @@ function QuestionShow() {
                                 {questions[questionIndex].opt.map((item, index) => (
                                     <button
                                         key={index}
-                                        onClick={() => selectAnswer(item)}  // Store the selected answer
+                                        onClick={() => selectAnswer(item)}  // Set the selected answer
                                         className={`block my-4 border-2 px-4 py-1 w-64 cursor-pointer m-auto
-                                             ${clickedAns[questionIndex] === item ? 'bg-blue-500' : ''}`} // Highlight selected answer
+                                             ${clickedAns === item ? 'bg-blue-500' : ''}`}
                                     >
                                         {item}
                                     </button>
@@ -78,7 +86,7 @@ function QuestionShow() {
                         ) : (
                             <div className='text-center'>
                                 <h2 className='text-4xl font-bold my-8'>Quiz Completed!</h2>
-                                <p className='text-2xl'>Your score: {score} / {questions.length}</p>
+                                <p className='text-2xl'>Your score: {correctAnswers.length} / {questions.length}</p>
                                 <button
                                     onClick={restartQuiz}
                                     className='w-32 border-2 py-2 bg-green-500 text-black cursor-pointer font-bold mt-6'
