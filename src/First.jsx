@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
-import Header from './header';
+import Header from './Header';
 import App from './App';
 import QuiestionShow from './QuiestionShow';
 
